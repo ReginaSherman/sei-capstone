@@ -5,6 +5,9 @@ from django.db import models
 
 class User(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    id = models.IntegerField(primary_key=True)
+
 
     def __str__ (self):
         return self.name
@@ -46,6 +49,7 @@ class Item(models.Model):
     size = models.CharField(max_length=100)
     description = models.CharField(max_length = 100)
     owner = models.ForeignKey('User', on_delete=models.CASCADE, related_name='items')
+    id = models.IntegerField(primary_key=True)
 
 
     def __str__ (self):
