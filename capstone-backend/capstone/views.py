@@ -6,6 +6,11 @@ from .serializers import ItemSerializer
 
 # Create your views here.
 
-class ItemList(generics.ListAPIView):
+class item_list(generics.ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
+class item_detail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+

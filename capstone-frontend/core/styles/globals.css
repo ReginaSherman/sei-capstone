@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+Img {
+  filter: drop-shadow(2px 2px 2px gray);
+}
