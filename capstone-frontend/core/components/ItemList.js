@@ -1,3 +1,4 @@
+import ItemCard from './ItemCard'
 import ItemDetail from './ItemDetail'
 import { SimpleGrid } from '@chakra-ui/react'
 
@@ -6,7 +7,7 @@ const ItemList = ({ items }) => {
         <div>
             <SimpleGrid minChildWidth='120px' spacing='20px'>
                 {items.map((item) => (
-                    <ItemDetail item={item} />
+                    <ItemCard item={item} />
                 ))}
             </SimpleGrid>
         </div>

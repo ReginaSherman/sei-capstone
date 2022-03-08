@@ -40,6 +40,7 @@ class Item(models.Model):
     SWEATER = 'Sweater'
     JACKET = 'Jacket'
     MISC = 'Miscellaneous'
+    
     XXS = 'XXS'
     XS = 'XS'
     SMALL = 'S'
