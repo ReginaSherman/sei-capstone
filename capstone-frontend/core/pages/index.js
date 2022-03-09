@@ -1,27 +1,38 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
+import Link from 'next/link'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 import ItemList from '../components/ItemList'
 import ItemDetail from '../components/ItemCard'
 
-import MyCloset from './mycloset'
 
-export default function Home({ items }) {
+
+export default function LogIn({ items }) {
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
   return (
     <div className='container'>
-      <ItemList items={items} />
+      {!session && (
+        <>
+          Not signed in <br />
+          <button onClick={signIn}>Sign In</button>
+        </>
+      )}
+      {
+        session && (
+          <>
+          Signed in as {session.user.email} <br />
+          <div> You can now access our super secret pages</div>
+          <Link href='/secret'>To the secret</Link>
+          <button onClick={signOut}>Sign Out</button>
+          </>
+        )
+      }
+     
     </div>
   )
 }
 
 
-export async function getStaticProps() {
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:8000/api/`)
-  const items = await res.json()
-
-  // Pass data to the page via props
-  return { props: { items } }
-}

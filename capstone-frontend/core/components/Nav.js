@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import navStyles from '../styles/Nav.module.css'
 import headerStyles from '../styles/Header.module.css'
+import { signOut } from 'next-auth/react'
 
 const Nav = () => {
     return (
         <nav className={navStyles.nav}>
             <ul>
                 <li>
-                    <Link href='/'>Home</Link>
+                    <Link href='/home'>Home</Link>
                 </li>
                 <li>
                     <Link href='/mycloset'>Closet</Link>
@@ -18,11 +19,11 @@ const Nav = () => {
 
                 <h1 className={headerStyles.title}>CommunityCloset</h1>
                 <li>
-                    <Link href='/mycloset'>Log Out</Link>
+                    <Link href='/'>Log Out</Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link href='/mycommunity'>Community</Link>
-                </li>
+                </li> */}
             </ul>
         </nav>
     )
