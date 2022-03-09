@@ -6,11 +6,9 @@ import {
     ModalFooter,
     ModalCloseButton,
     Button,
-    useDisclosure
 } from '@chakra-ui/react'
 
 const NewItemForm = () => {
-    const { onClose } = useDisclosure()
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
     const [category, setCategory] = useState('')
@@ -19,7 +17,7 @@ const NewItemForm = () => {
     const [owner, setOwner] = useState('')
 
     const submitItem = async () => {
-        try{
+        try {
         const res = await fetch('http://localhost:8000/api/items', {
             method: 'POST',
             body: JSON.stringify({ title, image, category, description, size, owner }),
@@ -48,27 +46,27 @@ const NewItemForm = () => {
                             type='text'
                             placeholder='Title'
                             value={title}
-                            onChange={e => setTitle(e.target.value)} />
+                            onChange={(e) => setTitle(e.target.value)} />
                         <FormLabel htmlFor='image'>Image</FormLabel>
                         <Input
                             id='image'
                             variant='unstyled'
                             type='file'
                             value={image}
-                            onChange={e => setImage(e.target.value)} />
+                            onChange={(e) => setImage(e.target.value)} />
                         <FormLabel htmlFor='description'>Description</FormLabel>
                         <Input
                             id='description'
                             type='text'
                             placeholder='Description'
                             value={description}
-                            onChange={e => setDescription(e.target.value)} />
+                            onChange={(e) => setDescription(e.target.value)} />
                         <FormLabel htmlFor='category'>Category</FormLabel>
                         <Select
                             id='category'
                             placeholder='Category'
                             value={category}
-                            onChange={e => setCategory(e.target.value)}>
+                            onChange={(e) => setCategory(e.target.value)}>
                             <option>Top</option>
                             <option>Bottom</option>
                             <option>Dress</option>
@@ -82,7 +80,7 @@ const NewItemForm = () => {
                             id='size'
                             placeholder='Size'
                             value={size}
-                            onChange={e => setSize(e.target.value)}>
+                            onChange={(e) => setSize(e.target.value)}>
                             <option>XXS</option>
                             <option>XS</option>
                             <option>S</option>
@@ -96,7 +94,7 @@ const NewItemForm = () => {
                             id='owner'
                             placeholder='Owner'
                             value={owner}
-                            onChange={e => setOwner(e.target.value)}>
+                            onChange={(e) => setOwner(e.target.value)}>
                             <option>2</option>
                         </Select>
                     </FormControl>

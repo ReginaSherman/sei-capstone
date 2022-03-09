@@ -79,7 +79,7 @@ class Item(models.Model):
         default= MEDIUM)
     description = models.CharField(max_length = 100)
     owner = models.ForeignKey('User', on_delete=models.CASCADE, related_name='items')
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
 
 
     def __str__ (self):
