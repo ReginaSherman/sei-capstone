@@ -7,35 +7,39 @@ import {
     ModalCloseButton,
     Button,
 } from '@chakra-ui/react'
+import axios from 'axios'
 
 const NewItemForm = () => {
-    const [title, setTitle] = useState('')
-    const [image, setImage] = useState('')
     const [category, setCategory] = useState('')
-    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState('')
+    const [image, setImage] = useState(null)
     const [size, setSize] = useState('')
+    const [description, setDescription] = useState('')
     const [owner, setOwner] = useState('')
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log('submitted!')
-        console.log(e.target)
-        try {
-            const res = await fetch('http://localhost:8000/api/items', {
-                method: 'POST',
-                body: JSON.stringify({ title, image, category, description, size, owner }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-        console.log(image)
-        console.log(res)
-        const data = await res.json()
-        console.log(data)
-    } catch (err){
-        console.error(err);
-    }
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e)
+    console.log(image)
+    let form_data = new FormData();
+    form_data.append('category', category);
+    form_data.append('title', title);
+    form_data.append('image', image);
+    form_data.append('size', size);
+    form_data.append('description', description);
+    form_data.append('owner', owner);
+
+    let url = 'http://localhost:8000/api/items';
+    axios.post(url, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err))
+  };
 
     return (
         <div>

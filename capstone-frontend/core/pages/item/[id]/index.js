@@ -15,7 +15,7 @@ const item = ({ item }) => {
 
 export const getServerSideProps = async (context) => {
     const res = await fetch(`http://localhost:8000/api/items/${context.params.id}`)
-    console.log(`Response: ${res}`)
+    console.log(res)
     const item = await res.json()
 
     return {
