@@ -14,11 +14,11 @@ class User(models.Model):
         return self.name
 
 class Post(models.Model):
-    id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100)
+    id = models.CharField(primary_key=True, max_length=100)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='post_images')
+    description = models.CharField(max_length=200)
+    category = models.CharField(max_length=100)
     size = models.CharField(max_length=100)
     owner = models.ForeignKey('User', on_delete=models.CASCADE, related_name='items')
     
