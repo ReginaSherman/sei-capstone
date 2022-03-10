@@ -16,18 +16,22 @@ const NewItemForm = () => {
     const [size, setSize] = useState('')
     const [owner, setOwner] = useState('')
 
-    const submitItem = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log('submitted!')
+        console.log(e.target)
         try {
-        const res = await fetch('http://localhost:8000/api/items', {
-            method: 'POST',
-            body: JSON.stringify({ title, image, category, description, size, owner }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+            const res = await fetch('http://localhost:8000/api/items', {
+                method: 'POST',
+                body: JSON.stringify({ title, image, category, description, size, owner }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        console.log(image)
         console.log(res)
         const data = await res.json()
-        console.log(data )
+        console.log(data)
     } catch (err){
         console.error(err);
     }
@@ -38,7 +42,7 @@ const NewItemForm = () => {
             <ModalContent>
                 <ModalHeader>Add an Item</ModalHeader>
                 <ModalCloseButton />
-                <form action="/action_page.php">
+                <form onSubmit={handleSubmit}>
                     <FormControl isRequired>
                         <FormLabel htmlFor='title'>Title</FormLabel>
                         <Input
@@ -47,13 +51,14 @@ const NewItemForm = () => {
                             placeholder='Title'
                             value={title}
                             onChange={(e) => setTitle(e.target.value)} />
+                        </FormControl>
                         <FormLabel htmlFor='image'>Image</FormLabel>
                         <Input
                             id='image'
                             variant='unstyled'
                             type='file'
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)} />
+                            onChange={(e) => setImage(e.target.files[0])} />
+                        <FormControl isRequired>
                         <FormLabel htmlFor='description'>Description</FormLabel>
                         <Input
                             id='description'
@@ -98,12 +103,13 @@ const NewItemForm = () => {
                             <option>2</option>
                         </Select>
                     </FormControl>
-                </form>
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={submitItem}>
+                    {/* <Button colorScheme='blue' mr={3} onClick='submit'>
                         Submit
-                    </Button>
+                    </Button> */}
+                    <input type='submit'/>
                 </ModalFooter>
+                </form>
             </ModalContent>
         </div>
     )
